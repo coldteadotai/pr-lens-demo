@@ -1,3 +1,4 @@
+import { recordOrderCreated } from "./audit";
 import { readAll, write } from "./store";
 
 export type Order = {
@@ -18,5 +19,6 @@ export function createOrder(body: unknown): Order {
     quantity: draft.quantity ?? 1,
   };
   write(order);
+  recordOrderCreated(order.id);
   return order;
 }
