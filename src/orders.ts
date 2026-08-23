@@ -1,4 +1,5 @@
 import { readAll, write } from "./store";
+import { notifyOrderCreated } from "./notifications";
 
 export type Order = {
   id: string;
@@ -18,5 +19,6 @@ export function createOrder(body: unknown): Order {
     quantity: draft.quantity ?? 1,
   };
   write(order);
+  notifyOrderCreated(order);
   return order;
 }
